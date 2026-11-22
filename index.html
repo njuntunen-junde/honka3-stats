@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<title>Honka 3 – kausiyhteenveto</title>
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg-grad: radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.18), transparent 60%),
+               radial-gradient(1000px 500px at 110% 10%, rgba(168,85,247,.12), transparent 55%),
+               #0a0e1a;
+    --card:#121829;
+    --card-border: rgba(255,255,255,.06);
+    --win:#22c55e;
+    --loss:#f43f5e;
+    --text:#e6e9f2;
+    --muted:#8891a7;
+    --border: rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg-grad);
+    color:var(--text);
+    padding:24px 16px 48px;
+    min-height:100%;
+  }
+  .wrap{max-width:900px;margin:0 auto;}
+  header{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg, rgba(59,130,246,.18), rgba(139,92,246,.14));
+    border:1px solid var(--card-border);
+    border-radius:20px;
+    padding:30px 28px 26px;
+    margin-bottom:20px;
+    backdrop-filter:blur(6px);
+  }
+  header::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(400px 200px at 90% -20%, rgba(139,92,246,.35), transparent 70%);
+    pointer-events:none;
+  }
+  header h1{
+    margin:0 0 4px; font-size:30px; font-weight:800; letter-spacing:-.02em;
+    background:linear-gradient(135deg,#fff,#b9c6ff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p{margin:0;color:var(--muted);font-size:14px;}
+  .standing{display:flex; gap:28px; margin-top:20px; flex-wrap:wrap; position:relative;}
+  .standing .stat{min-width:76px;}
+  .standing .stat .num{font-size:22px;font-weight:700;letter-spacing:-.01em;}
+  .standing .stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+  .streak{display:flex;gap:5px;margin-top:18px;position:relative;}
+  .streak span{
+    width:22px;height:22px;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:800;color:white;
+  }
+  .streak span.W{background:linear-gradient(135deg,#22c55e,#16a34a);}
+  .streak span.L{background:linear-gradient(135deg,#f43f5e,#be123c);}
+  .card{
+    background:var(--card); border:1px solid var(--card-border); border-radius:16px;
+    padding:20px 22px; margin-bottom:18px; box-shadow:0 10px 30px -15px rgba(0,0,0,.5);
+  }
+  .card h2{margin:0 0 14px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;}
+  .split-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;}
+  .split-row .card{flex:1;min-width:200px;margin-bottom:0;}
+  .splitbig{font-size:28px;font-weight:800;letter-spacing:-.02em;}
+  .splitsub{font-size:13px;color:var(--muted);margin-top:4px;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th{
+    text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--muted);padding:8px 8px;border-bottom:1px solid var(--border);font-weight:600;
+  }
+  th.sortable{cursor:pointer;user-select:none;-webkit-user-select:none;transition:color .15s;}
+  th.sortable:hover{color:var(--text);}
+  th.sortable.active{color:#cdd7ff;}
+  th.sortable .arrow{display:inline-block;margin-left:4px;font-size:9px;opacity:.35;}
+  th.sortable.active .arrow{opacity:1;}
+  td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  tbody tr{transition:background .15s;}
+  tbody tr:hover{background:rgba(255,255,255,.03);}
+  .num-cell{text-align:right;font-variant-numeric:tabular-nums;}
+  .rank-cell{color:var(--muted);font-size:12px;width:24px;}
+  .player-name{font-weight:600;}
+  .ppg-cell{font-weight:700;color:#cdd7ff;}
+  .wp-bar-wrap{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+  .wp-track{width:56px;height:6px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden;flex-shrink:0;}
+  .wp-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#22c55e,#4ade80);}
+  .wp-val{font-variant-numeric:tabular-nums;font-weight:600;font-size:13px;width:40px;text-align:right;}
+  .game-block{padding:11px 0;border-bottom:1px solid var(--border);}
+  .game-block:last-child{border-bottom:none;}
+  .game{display:flex;align-items:center;gap:12px;}
+  .game .date{width:64px;font-size:12px;color:var(--muted);flex-shrink:0;}
+  .game .teams{flex:1;font-size:14px;color:var(--text);}
+  .game .teams .honka{font-weight:700;color:#cdd7ff;}
+  .game .score{font-weight:700;font-variant-numeric:tabular-nums;width:66px;text-align:center;flex-shrink:0;}
+  .badge{
+    display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+    border-radius:7px;font-size:12px;font-weight:800;color:white;flex-shrink:0;
+  }
+  .badge.W{background:linear-gradient(135deg,#22c55e,#16a34a);}
+  .badge.L{background:linear-gradient(135deg,#f43f5e,#be123c);}
+  .loc{font-size:11px;color:var(--muted);width:66px;text-align:right;flex-shrink:0;}
+  .scorers{margin-top:7px;padding-left:36px;font-size:12px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;}
+  .scorers .sc-name{color:#cdd7ff;font-weight:600;}
+  .scorers .sc-pts{color:var(--muted);}
+  .scorers .none{font-style:italic;opacity:.7;}
+  .upcoming-item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);}
+  .upcoming-item:last-child{border-bottom:none;}
+  .upcoming-item .when{width:150px;flex-shrink:0;}
+  .upcoming-item .when .d{font-weight:700;font-size:14px;}
+  .upcoming-item .when .t{font-size:12px;color:var(--muted);}
+  .upcoming-item .opp{flex:1;font-size:14px;}
+  .upcoming-item .venue{font-size:12px;color:var(--muted);text-align:right;max-width:180px;}
+  .postponed{color:var(--loss);font-size:12px;font-weight:700;}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px;}
+  @media (max-width:480px){
+    .loc{display:none;}
+    .game .date{width:52px;}
+    .wp-track{width:40px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Honka 3</h1>
+    <p>Miesten III divisioona, Eteläinen alue A-lohko · Kausi 2026-2027</p>
+    <div class="standing">
+      <div class="stat"><div class="num">5–3</div><div class="lbl">Voitot–Tappiot</div></div>
+      <div class="stat"><div class="num">640–567</div><div class="lbl">Koripisteet</div></div>
+      <div class="stat"><div class="num">+73</div><div class="lbl">Ero</div></div>
+    </div>
+    <div class="streak" title="5 viimeisintä ottelua, vanhin vasemmalla"><span class="W">V</span><span class="W">V</span><span class="W">V</span><span class="L">H</span><span class="L">H</span></div>
+  </header>
+
+  <div class="split-row">
+    <div class="card">
+      <h2>Kotiottelut</h2>
+      <div class="splitbig">2–2</div>
+      <div class="splitsub">286–271 (4 ottelua)</div>
+    </div>
+    <div class="card">
+      <h2>Vierasottelut</h2>
+      <div class="splitbig">3–1</div>
+      <div class="splitsub">354–296 (4 ottelua)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Pelatut ottelut (8)</h2>
+    <div class="game-block">
+      <div class="game">
+        <div class="date">15.11.</div>
+        <span class="badge L">H</span>
+        <div class="teams"><span class="honka">Honka 3</span> – WB Legends</div>
+        <div class="score">79–86</div>
+        <div class="loc">Honkahalli Pihlajalinna</div>
+      </div>
+      <div class="scorers"><span><span class="sc-name">Väänänen Jukka-Pekka</span> <span class="sc-pts">28</span></span><span><span class="sc-name">Kasko Antti</span> <span class="sc-pts">23</span></span><span><span class="sc-name">Vanjoki Anselmi</span> <span class="sc-pts">17</span></span></div>
+    </div>
+
+    <div class="game-block">
+      <div class="game">
+        <div class="date">3.11.</div>
+        <span class="badge L">H</span>
+        <div class="teams">HNMKY Akatemia – <span class="honka">Honka 3</span></div>
+        <div class="score">98–89</div>
+        <div class="loc">Malmin palloiluhalli 1</div>
+      </div>
+      <div class="scorers"><span class="none">Pelaajakohtaisia pisteitä ei kirjattu tähän otteluun</span></div>
+    </div>
+
+    <div class="game-block">
+      <div class="game">
+        <div class="date">1.11.</div>
+        <span class="badge W">V</span>
+        <div class="teams"><span class="honka">Honka 3</span> – Dynamo</div>
+        <div class="score">67–56</div>
+        <div class="loc">Honkahalli Pihlajalinna</div>
+      </div>
+      <div class="scorers"><span><span class="sc-name">Wilson Jamar</span> <span class="sc-pts">26</span></span><span><span class="sc-name">Vanjoki Viljami</span> <span class="sc-pts">15</span></span><span><span class="sc-name">Vanjoki Anselmi</span> <span class="sc-pts">8</span></span></div>
+    </div>
+
+    <div class="game-block">
+      <div class="game">
+        <div class="date">25.10.</div>
+        <span class="badge W">V</span>
+        <div class="teams">LePy – <span class="honka">Honka 3</span></div>
+        <div class="score">62–86</div>
+        <div class="loc">Karakallion koulu</div>
+      </div>
+      <div class="scorers"><span><span class="sc-name">Vanjoki Anselmi</span> <span class="sc-pts">21</span></span><span><span class="sc-name">Blomster Jesper</span> <span class="sc-pts">16</span></span><span><span class="sc-name">Kasko Antti</span> <span class="sc-pts">15</span></span></div>
+    </div>
+
+    <div class="game-block">
+      <div class="game">
+        <div class="date">11.10.</div>
+        <span class="badge W">V</span>
+        <div class="teams">MuKi III – <span class="honka">Honka 3</span></div>
+        <div class="score">75–98</div>
+        <div class="loc">Pirkkolan palloiluhalli</div>
+      </div>
+      <div class="scorers"><span><span class="sc-name">Blomster Jesper</span> <span class="sc-pts">32</span></span><span><span class="sc-name">Väänänen Jukka-Pekka</span> <span class="sc-pts">21</span></span><span><span class="sc-name">Juntunen Niko</span> <span class="sc-pts">11</span></span></div>
+    </div>
+
+    <div class="game-block">
+      <div class="game">
+        <div class="date">4.10.</div>
+        <span class="badge W">V</span>
+        <div class="teams"><span class="honka">Honka 3</span> – Seniors</div>
+        <div class="score">74–60</div>
+        <div class="loc">Honkahalli Pihlajalinna</div>
+      </div>
+      <div class="scorers"><span><span class="sc-name">Väänänen Jukka-Pekka</span> <span class="sc-pts">20</span></span><span><span class="sc-name">Suotamo Joonas</span> <span class="sc-pts">15</span></span><span><span class="sc-name">Kasko Tapio</span> <span class="sc-pts">14</span></span></div>
+    </div>
+
+    <div class="game-block">
+      <div class="game">
+        <div class="date">21.9.</div>
+        <span class="badge W">V</span>
+        <div class="teams">ToPoLa Top Gun – <span class="honka">Honka 3</span></div>
+        <div class="score">61–81</div>
+        <div class="loc">Kampin liikuntakeskus</div>
+      </div>
+      <div class="scorers"><span><span class="sc-name">Kasko Antti</span> <span class="sc-pts">20</span></span><span><span class="sc-name">Sirola Ilkka</span> <span class="sc-pts">15</span></span><span><span class="sc-name">Väänänen Jukka-Pekka</span> <span class="sc-pts">15</span></span></div>
+    </div>
+
+    <div class="game-block">
+      <div class="game">
+        <div class="date">20.9.</div>
+        <span class="badge L">H</span>
+        <div class="teams"><span class="honka">Honka 3</span> – Ming Dynasty</div>
+        <div class="score">66–69</div>
+        <div class="loc">Honkahalli Pihlajalinna</div>
+      </div>
+      <div class="scorers"><span><span class="sc-name">Väänänen Jukka-Pekka</span> <span class="sc-pts">24</span></span><span><span class="sc-name">Kasko Antti</span> <span class="sc-pts">12</span></span><span><span class="sc-name">Vanjoki Viljami</span> <span class="sc-pts">11</span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Pelaajatilastot <span style="opacity:.6;">· klikkaa saraketta sortataksesi</span></h2>
+    <table id="stats-table">
+      <thead>
+        <tr>
+          <th class="rank-cell">#</th>
+          <th class="sortable" data-key="name" data-type="str">Pelaaja<span class="arrow">▲▼</span></th>
+          <th class="sortable num-cell" data-key="gp" data-type="num">Ott.<span class="arrow">▲▼</span></th>
+          <th class="sortable num-cell" data-key="pts" data-type="num">Pist.<span class="arrow">▲▼</span></th>
+          <th class="sortable num-cell active" data-key="ppg" data-type="num" data-dir="desc">Piste-ka<span class="arrow">▲▼</span></th>
+          <th class="sortable num-cell" data-key="wp" data-type="num">Voitto-%<span class="arrow">▲▼</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-name="Wilson Jamar" data-gp="1" data-pts="26" data-ppg="26.0" data-wp="100.0">
+          <td class="rank-cell"></td>
+          <td class="player-name">Wilson Jamar</td>
+          <td class="num-cell">1</td><td class="num-cell">26</td><td class="num-cell ppg-cell">26.0</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:100.0%"></div></div><span class="wp-val">100.0%</span></div></td>
+        </tr>
+        <tr data-name="Väänänen Jukka-Pekka" data-gp="6" data-pts="117" data-ppg="19.5" data-wp="66.7">
+          <td class="rank-cell"></td>
+          <td class="player-name">Väänänen Jukka-Pekka</td>
+          <td class="num-cell">6</td><td class="num-cell">117</td><td class="num-cell ppg-cell">19.5</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:66.7%"></div></div><span class="wp-val">66.7%</span></div></td>
+        </tr>
+        <tr data-name="Blomster Jesper" data-gp="3" data-pts="58" data-ppg="19.3" data-wp="66.7">
+          <td class="rank-cell"></td>
+          <td class="player-name">Blomster Jesper</td>
+          <td class="num-cell">3</td><td class="num-cell">58</td><td class="num-cell ppg-cell">19.3</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:66.7%"></div></div><span class="wp-val">66.7%</span></div></td>
+        </tr>
+        <tr data-name="Kasko Antti" data-gp="7" data-pts="84" data-ppg="12.0" data-wp="57.1">
+          <td class="rank-cell"></td>
+          <td class="player-name">Kasko Antti</td>
+          <td class="num-cell">7</td><td class="num-cell">84</td><td class="num-cell ppg-cell">12.0</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:57.1%"></div></div><span class="wp-val">57.1%</span></div></td>
+        </tr>
+        <tr data-name="Vanjoki Anselmi" data-gp="4" data-pts="46" data-ppg="11.5" data-wp="50.0">
+          <td class="rank-cell"></td>
+          <td class="player-name">Vanjoki Anselmi</td>
+          <td class="num-cell">4</td><td class="num-cell">46</td><td class="num-cell ppg-cell">11.5</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:50.0%"></div></div><span class="wp-val">50.0%</span></div></td>
+        </tr>
+        <tr data-name="Suotamo Joonas" data-gp="5" data-pts="45" data-ppg="9.0" data-wp="80.0">
+          <td class="rank-cell"></td>
+          <td class="player-name">Suotamo Joonas</td>
+          <td class="num-cell">5</td><td class="num-cell">45</td><td class="num-cell ppg-cell">9.0</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:80.0%"></div></div><span class="wp-val">80.0%</span></div></td>
+        </tr>
+        <tr data-name="Vanjoki Viljami" data-gp="7" data-pts="54" data-ppg="7.7" data-wp="57.1">
+          <td class="rank-cell"></td>
+          <td class="player-name">Vanjoki Viljami</td>
+          <td class="num-cell">7</td><td class="num-cell">54</td><td class="num-cell ppg-cell">7.7</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:57.1%"></div></div><span class="wp-val">57.1%</span></div></td>
+        </tr>
+        <tr data-name="Sirola Ilkka" data-gp="7" data-pts="45" data-ppg="6.4" data-wp="71.4">
+          <td class="rank-cell"></td>
+          <td class="player-name">Sirola Ilkka</td>
+          <td class="num-cell">7</td><td class="num-cell">45</td><td class="num-cell ppg-cell">6.4</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:71.4%"></div></div><span class="wp-val">71.4%</span></div></td>
+        </tr>
+        <tr data-name="Pitkänen Lauri" data-gp="8" data-pts="37" data-ppg="4.6" data-wp="62.5">
+          <td class="rank-cell"></td>
+          <td class="player-name">Pitkänen Lauri</td>
+          <td class="num-cell">8</td><td class="num-cell">37</td><td class="num-cell ppg-cell">4.6</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:62.5%"></div></div><span class="wp-val">62.5%</span></div></td>
+        </tr>
+        <tr data-name="Kasko Tapio" data-gp="8" data-pts="28" data-ppg="3.5" data-wp="62.5">
+          <td class="rank-cell"></td>
+          <td class="player-name">Kasko Tapio</td>
+          <td class="num-cell">8</td><td class="num-cell">28</td><td class="num-cell ppg-cell">3.5</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:62.5%"></div></div><span class="wp-val">62.5%</span></div></td>
+        </tr>
+        <tr data-name="Juntunen Niko" data-gp="7" data-pts="11" data-ppg="1.6" data-wp="71.4">
+          <td class="rank-cell"></td>
+          <td class="player-name">Juntunen Niko</td>
+          <td class="num-cell">7</td><td class="num-cell">11</td><td class="num-cell ppg-cell">1.6</td>
+          <td class="num-cell"><div class="wp-bar-wrap"><div class="wp-track"><div class="wp-fill" style="width:71.4%"></div></div><span class="wp-val">71.4%</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Seuraavat ottelut</h2>
+    <div class="upcoming-item">
+      <div class="when"><div class="d">Su 29.11.</div><div class="t">20:40</div></div>
+      <div class="opp"><span class="honka">Honka 3</span> – HypoII</div>
+      <div class="venue">Honkahalli Pihlajalinna, Espoo</div>
+    </div>
+
+    <div class="upcoming-item">
+      <div class="when"><div class="d">Su 13.12.</div><div class="t">20:40</div></div>
+      <div class="opp"><span class="honka">Honka 3</span> – Aalto Buckets</div>
+      <div class="venue">Honkahalli Pihlajalinna, Espoo</div>
+    </div>
+
+    <div class="upcoming-item">
+      <div class="when"><div class="d">La 12.9.</div><div class="t">14:30</div></div>
+      <div class="opp">BC Hukat – <span class="honka">Honka 3</span> <span class="postponed">(Ottelu siirtyy)</span></div>
+      <div class="venue">Kartanonkosken koulu, Vantaa</div>
+    </div>
+  </div>
+
+  <footer>Lähde: tulospalvelu.basket.fi · Honka 3, kausi 2026-2027 · Voitto-% laskettu kunkin pelaajan pelaamista otteluista, kun kokoonpanotieto on saatavilla · Päivittyy automaattisesti pelin jälkeisenä iltana · Päivitetty 2026-11-22T10:50:00Z</footer>
+</div>
+
+<script>
+(function(){
+  var table = document.getElementById('stats-table');
+  var tbody = table.querySelector('tbody');
+  var ths = Array.prototype.slice.call(table.querySelectorAll('th.sortable'));
+
+  function renumber(){
+    var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+    rows.forEach(function(row, i){ row.querySelector('.rank-cell').textContent = i + 1; });
+  }
+
+  function sortBy(key, type, dir){
+    var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+    rows.sort(function(a, b){
+      var av = a.getAttribute('data-' + key);
+      var bv = b.getAttribute('data-' + key);
+      if(type === 'num'){
+        av = parseFloat(av); bv = parseFloat(bv);
+        return dir === 'asc' ? av - bv : bv - av;
+      } else {
+        av = av.toLowerCase(); bv = bv.toLowerCase();
+        if(av < bv) return dir === 'asc' ? -1 : 1;
+        if(av > bv) return dir === 'asc' ? 1 : -1;
+        return 0;
+      }
+    });
+    rows.forEach(function(row){ tbody.appendChild(row); });
+    renumber();
+  }
+
+  ths.forEach(function(th){
+    th.addEventListener('click', function(){
+      var key = th.getAttribute('data-key');
+      var type = th.getAttribute('data-type');
+      var curDir = th.getAttribute('data-dir');
+      var newDir = curDir === 'desc' ? 'asc' : 'desc';
+      ths.forEach(function(t){ t.classList.remove('active'); t.removeAttribute('data-dir'); });
+      th.classList.add('active');
+      th.setAttribute('data-dir', newDir);
+      sortBy(key, type, newDir);
+    });
+  });
+
+  renumber();
+})();
+</script>
+</body>
+</html>

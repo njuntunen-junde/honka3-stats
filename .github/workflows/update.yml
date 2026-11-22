@@ -1,0 +1,49 @@
+name: Päivitä Honka 3 -yhteenveto
+
+on:
+  schedule:
+    # 21:30 UTC joka päivä = 23:30 Suomen talviaikaa / 00:30 kesäaikaa.
+    # Honka 3:n ottelut alkavat illalla (~18:00-20:45) ja kestävät n. 2h,
+    # joten tämä ajoitus on turvallisesti pelien päättymisen jälkeen samana iltana.
+    - cron: "30 21 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-honka3
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Scrape tulospalvelu.basket.fi
+        run: python scrape.py
+
+      - name: Render index.html
+        run: python render.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "honka3-stats-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- data.json index.html; then
+            echo "Ei muutoksia, ei committia."
+            exit 0
+          fi
+          git add data.json index.html
+          git commit -m "Automaattinen päivitys $(date -u +%Y-%m-%d)"
+          git push

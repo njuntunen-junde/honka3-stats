@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-11-22T10:50:00Z",
+  "team_title": "Honka 3",
+  "season": "2026-2027",
+  "season_totals": {
+    "Juntunen Niko": {"games": 7, "points": 11},
+    "Vanjoki Viljami": {"games": 7, "points": 54},
+    "Kasko Tapio": {"games": 8, "points": 28},
+    "Sirola Ilkka": {"games": 7, "points": 45},
+    "Suotamo Joonas": {"games": 5, "points": 45},
+    "Väänänen Jukka-Pekka": {"games": 6, "points": 117},
+    "Blomster Jesper": {"games": 3, "points": 58},
+    "Vanjoki Anselmi": {"games": 4, "points": 46},
+    "Kasko Antti": {"games": 7, "points": 84},
+    "Pitkänen Lauri": {"games": 8, "points": 37},
+    "Wilson Jamar": {"games": 1, "points": 26}
+  },
+  "played": [
+    {"weekday": "su", "date": "15.11.", "time": "20:40", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Honkahalli Pihlajalinna, Espoo", "teamA": "Honka 3", "scoreA": 79, "scoreB": 86, "teamB": "WB Legends", "attendance": 7},
+    {"weekday": "ti", "date": "3.11.", "time": "20:45", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Malmin palloiluhalli 1, Helsinki", "teamA": "HNMKY Akatemia", "scoreA": 98, "scoreB": 89, "teamB": "Honka 3", "attendance": null},
+    {"weekday": "su", "date": "1.11.", "time": "20:40", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Honkahalli Pihlajalinna, Espoo", "teamA": "Honka 3", "scoreA": 67, "scoreB": 56, "teamB": "Dynamo", "attendance": 5},
+    {"weekday": "su", "date": "25.10.", "time": "18:00", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Karakallion koulu, Espoo", "teamA": "LePy", "scoreA": 62, "scoreB": 86, "teamB": "Honka 3", "attendance": 20},
+    {"weekday": "su", "date": "11.10.", "time": "18:30", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Pirkkolan palloiluhalli, Helsinki", "teamA": "MuKi III", "scoreA": 75, "scoreB": 98, "teamB": "Honka 3", "attendance": 5},
+    {"weekday": "su", "date": "4.10.", "time": "20:40", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Honkahalli Pihlajalinna, Espoo", "teamA": "Honka 3", "scoreA": 74, "scoreB": 60, "teamB": "Seniors", "attendance": 3},
+    {"weekday": "ma", "date": "21.9.", "time": "20:30", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Kampin liikuntakeskus, Helsinki", "teamA": "ToPoLa Top Gun", "scoreA": 61, "scoreB": 81, "teamB": "Honka 3", "attendance": 5},
+    {"weekday": "su", "date": "20.9.", "time": "20:40", "competition": "Miesten III divisioona Eteläinen alue", "venue": "Honkahalli Pihlajalinna, Espoo", "teamA": "Honka 3", "scoreA": 66, "scoreB": 69, "teamB": "Ming Dynasty", "attendance": 1}
+  ],
+  "upcoming": [
+    {"weekday": "su", "date": "29.11.", "time": "20:40", "venue": "Honkahalli Pihlajalinna, Espoo", "teamA": "Honka 3", "teamB": "HypoII", "notes": []},
+    {"weekday": "su", "date": "13.12.", "time": "20:40", "venue": "Honkahalli Pihlajalinna, Espoo", "teamA": "Honka 3", "teamB": "Aalto Buckets", "notes": []},
+    {"weekday": "la", "date": "12.9.", "time": "14:30", "venue": "Kartanonkosken koulu, Vantaa", "teamA": "BC Hukat", "teamB": "Honka 3", "notes": ["Ottelu siirtyy"]}
+  ],
+  "match_ids": ["1005109", "1005102", "1005095", "1005088", "1005121", "1005081", "1005078", "1005072"],
+  "boxscores": {
+    "1005109": {"Juntunen Niko": {"pts": 0, "fouls": 1}, "Vanjoki Viljami": {"pts": 0, "fouls": 0}, "Kasko Tapio": {"pts": 5, "fouls": 0}, "Väänänen Jukka-Pekka": {"pts": 28, "fouls": 1}, "Vanjoki Anselmi": {"pts": 17, "fouls": 1}, "Kasko Antti": {"pts": 23, "fouls": 3}, "Pitkänen Lauri": {"pts": 6, "fouls": 2}},
+    "1005102": {"Vanjoki Viljami": {"pts": 0, "fouls": 0}, "Kasko Tapio": {"pts": 0, "fouls": 0}, "Sirola Ilkka": {"pts": 0, "fouls": 0}, "Vanjoki Anselmi": {"pts": 0, "fouls": 0}, "Kasko Antti": {"pts": 0, "fouls": 0}, "Pitkänen Lauri": {"pts": 0, "fouls": 0}},
+    "1005095": {"Juntunen Niko": {"pts": 0, "fouls": 0}, "Vanjoki Viljami": {"pts": 15, "fouls": 1}, "Kasko Tapio": {"pts": 6, "fouls": 1}, "Sirola Ilkka": {"pts": 6, "fouls": 3}, "Wilson Jamar": {"pts": 26, "fouls": 1}, "Vanjoki Anselmi": {"pts": 8, "fouls": 1}, "Kasko Antti": {"pts": 6, "fouls": 1}, "Pitkänen Lauri": {"pts": 0, "fouls": 1}},
+    "1005088": {"Kasko Antti": {"pts": 15, "fouls": null}, "Blomster Jesper": {"pts": 16, "fouls": null}, "Sirola Ilkka": {"pts": 11, "fouls": null}, "Vanjoki Anselmi": {"pts": 21, "fouls": null}, "Suotamo Joonas": {"pts": 5, "fouls": null}, "Vanjoki Viljami": {"pts": 7, "fouls": null}, "Väänänen Jukka-Pekka": {"pts": 9, "fouls": null}, "Pitkänen Lauri": {"pts": 2, "fouls": null}, "Kasko Tapio": {"pts": 0, "fouls": null}, "Juntunen Niko": {"pts": 0, "fouls": null}},
+    "1005121": {"Juntunen Niko": {"pts": 11, "fouls": 3}, "Kasko Tapio": {"pts": 2, "fouls": 0}, "Sirola Ilkka": {"pts": 9, "fouls": 4}, "Suotamo Joonas": {"pts": 9, "fouls": 0}, "Väänänen Jukka-Pekka": {"pts": 21, "fouls": 0}, "Blomster Jesper": {"pts": 32, "fouls": 3}, "Kasko Antti": {"pts": 8, "fouls": 0}, "Pitkänen Lauri": {"pts": 6, "fouls": 2}},
+    "1005081": {"Juntunen Niko": {"pts": 0, "fouls": 2}, "Vanjoki Viljami": {"pts": 13, "fouls": 1}, "Kasko Tapio": {"pts": 14, "fouls": 2}, "Sirola Ilkka": {"pts": 4, "fouls": 1}, "Suotamo Joonas": {"pts": 15, "fouls": 1}, "Väänänen Jukka-Pekka": {"pts": 20, "fouls": 0}, "Pitkänen Lauri": {"pts": 8, "fouls": 3}},
+    "1005078": {"Juntunen Niko": {"pts": 0, "fouls": 0}, "Vanjoki Viljami": {"pts": 8, "fouls": 0}, "Kasko Tapio": {"pts": 0, "fouls": 2}, "Sirola Ilkka": {"pts": 15, "fouls": 2}, "Suotamo Joonas": {"pts": 14, "fouls": 0}, "Väänänen Jukka-Pekka": {"pts": 15, "fouls": 2}, "Kasko Antti": {"pts": 20, "fouls": 1}, "Pitkänen Lauri": {"pts": 9, "fouls": 0}},
+    "1005072": {"Juntunen Niko": {"pts": 0, "fouls": 1}, "Vanjoki Viljami": {"pts": 11, "fouls": 3}, "Kasko Tapio": {"pts": 1, "fouls": 0}, "Sirola Ilkka": {"pts": 0, "fouls": 0}, "Suotamo Joonas": {"pts": 2, "fouls": 4}, "Väänänen Jukka-Pekka": {"pts": 24, "fouls": 2}, "Blomster Jesper": {"pts": 10, "fouls": 3}, "Kasko Antti": {"pts": 12, "fouls": 0}, "Pitkänen Lauri": {"pts": 6, "fouls": 1}}
+  }
+}
