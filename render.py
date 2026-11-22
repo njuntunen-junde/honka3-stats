@@ -18,6 +18,18 @@ def is_honka(name):
     return name == TEAM
 
 
+def canon_name(raw, known_names):
+    """Lineup/boxscore pages sometimes show a fuller name (middle name
+    included, e.g. 'Pitkänen Lauri Tapani') than the season players list
+    ('Pitkänen Lauri'). Map the former onto the latter so stats join up."""
+    if raw in known_names:
+        return raw
+    for k in known_names:
+        if raw.startswith(k + " ") or k.startswith(raw + " "):
+            return k
+    return raw
+
+
 def game_result(g):
     """Returns (honka_pts, opp_pts, won, home) for a played game."""
     if is_honka(g["teamA"]):
@@ -43,6 +55,7 @@ def build():
     # per player: games played (derived), wins (derived)
     derived_games = {}
     derived_wins = {}
+    known_names = set(season_totals.keys())
 
     game_blocks = []
     for i, g in enumerate(played):
@@ -66,13 +79,14 @@ def build():
         if linked:
             mid = match_ids[i]
             roster = boxscores.get(mid, {}) or {}
-        for name in roster:
+        for raw_name in roster:
+            name = canon_name(raw_name, known_names)
             derived_games[name] = derived_games.get(name, 0) + 1
             if won:
                 derived_wins[name] = derived_wins.get(name, 0) + 1
 
         top3 = sorted(
-            [(n, r.get("pts") or 0) for n, r in roster.items()],
+            [(canon_name(n, known_names), r.get("pts") or 0) for n, r in roster.items()],
             key=lambda x: -x[1],
         )[:3]
 
