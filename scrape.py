@@ -102,26 +102,18 @@ def parse_fixture(lines):
             idx += 1
             team_a = lines[idx] if idx < n else None
             idx += 1
+            # Exactly one line follows team A before team B: either a plain
+            # "–" separator (normal upcoming game), or a note such as
+            # "Ottelu siirtyy" (postponed game). Never scan further than
+            # that — anything past team B may be the next game's heading
+            # or, for the last entry on the page, the site footer.
             notes = []
-            team_b = None
-            # scan ahead until the next weekday/date marker or EOF
-            while idx < n and not WEEKDAY_DATE_RE.match(lines[idx]):
-                if lines[idx] == "–":
-                    idx += 1
-                    continue
-                if team_b is None and idx + 1 >= n:
-                    team_b = lines[idx]; idx += 1
-                elif team_b is None:
-                    # heuristic: last plain line before the next date marker is team B;
-                    # anything earlier is a note (e.g. "Ottelu siirtyy")
-                    look = idx
-                    while look < n and not WEEKDAY_DATE_RE.match(lines[look]):
-                        look += 1
-                    team_b = lines[look - 1]
-                    notes = lines[idx:look - 1]
-                    idx = look
-                else:
-                    idx += 1
+            sep_or_note = lines[idx] if idx < n else None
+            idx += 1
+            if sep_or_note is not None and sep_or_note != "–":
+                notes = [sep_or_note]
+            team_b = lines[idx] if idx < n else None
+            idx += 1
             games.append({
                 "weekday": weekday, "date": date, "time": time_s,
                 "venue": venue, "teamA": team_a, "teamB": team_b,

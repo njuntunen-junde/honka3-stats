@@ -197,12 +197,9 @@
       "time": "14:30",
       "venue": "Kartanonkosken koulu, Vantaa",
       "teamA": "BC Hukat",
-      "teamB": "Miesten III divisioona Eteläinen alue",
+      "teamB": "Honka 3",
       "notes": [
-        "Ottelu siirtyy",
-        "Honka 3",
-        "11/2026",
-        "1 ottelu"
+        "Ottelu siirtyy"
       ]
     },
     {
@@ -211,12 +208,8 @@
       "time": "20:40",
       "venue": "Honkahalli Pihlajalinna, Espoo",
       "teamA": "Honka 3",
-      "teamB": "Miesten III divisioona Eteläinen alue",
-      "notes": [
-        "HypoII",
-        "12/2026",
-        "1 ottelu"
-      ]
+      "teamB": "HypoII",
+      "notes": []
     },
     {
       "weekday": "su",
@@ -224,30 +217,8 @@
       "time": "20:40",
       "venue": "Honkahalli Pihlajalinna, Espoo",
       "teamA": "Honka 3",
-      "teamB": "© Suomen Koripalloliitto ry 2026 • Tulospalvelujärjestelmä © TorneoPal® 2026",
-      "notes": [
-        "Aalto Buckets",
-        "Valitut tänään",
-        "Et ole valinnut yhtään ottelua",
-        "Suosikit",
-        "Et ole valinnut suosikiksi yhtään joukkuetta, seuraa tai pelaajaa",
-        "Lisenssikauppa",
-        "BasketShop",
-        "Suomen Koripalloliitto",
-        "Urheilupuistontie 3",
-        "02200 Espoo",
-        "office@basket.fi",
-        "›",
-        "Henkilöstön yhteystiedot",
-        "›",
-        "Alueiden yhteystiedot",
-        "›",
-        "Laskutustiedot",
-        "›",
-        "Käyttöehdot ja tietosuoja",
-        "›",
-        "Evästeet"
-      ]
+      "teamB": "Aalto Buckets",
+      "notes": []
     }
   ],
   "match_ids": [
