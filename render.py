@@ -52,9 +52,11 @@ def build():
     home_pf = home_pa = away_pf = away_pa = 0
     pf_total = pa_total = 0
 
-    # per player: games played (derived), wins (derived)
+    # per player: games played (derived), wins (derived), fouls (derived)
     derived_games = {}
     derived_wins = {}
+    derived_fouls = {}
+    derived_foul_games = {}
     known_names = set(season_totals.keys())
 
     game_blocks = []
@@ -79,11 +81,15 @@ def build():
         if linked:
             mid = match_ids[i]
             roster = boxscores.get(mid, {}) or {}
-        for raw_name in roster:
+        for raw_name, rdata in roster.items():
             name = canon_name(raw_name, known_names)
             derived_games[name] = derived_games.get(name, 0) + 1
             if won:
                 derived_wins[name] = derived_wins.get(name, 0) + 1
+            fouls = rdata.get("fouls")
+            if fouls is not None:
+                derived_fouls[name] = derived_fouls.get(name, 0) + fouls
+                derived_foul_games[name] = derived_foul_games.get(name, 0) + 1
 
         top3 = sorted(
             [(canon_name(n, known_names), r.get("pts") or 0) for n, r in roster.items()],
@@ -131,7 +137,13 @@ def build():
         dgp = derived_games.get(name)
         dw = derived_wins.get(name, 0)
         wp = (dw / dgp * 100) if dgp else None
-        rows.append({"name": name, "gp": gp, "pts": pts, "ppg": ppg, "wp": wp})
+        fgp = derived_foul_games.get(name)
+        fouls_total = derived_fouls.get(name)
+        fpg = (fouls_total / fgp) if fgp else None
+        rows.append({
+            "name": name, "gp": gp, "pts": pts, "ppg": ppg, "wp": wp,
+            "fouls": fouls_total, "fpg": fpg,
+        })
 
     rows.sort(key=lambda r: -r["ppg"])
 
@@ -144,10 +156,15 @@ def build():
             if r["wp"] is not None else
             '<span class="wp-val" style="opacity:.4">–</span>'
         )
-        player_rows_html.append(f'''        <tr data-name="{esc(r["name"])}" data-gp="{r["gp"]}" data-pts="{r["pts"]}" data-ppg="{r["ppg"]:.1f}" data-wp="{r["wp"] if r["wp"] is not None else -1:.1f}">
+        fouls_cell = str(r["fouls"]) if r["fouls"] is not None else "–"
+        fpg_cell = f'{r["fpg"]:.1f}' if r["fpg"] is not None else "–"
+        fouls_sort = r["fouls"] if r["fouls"] is not None else -1
+        fpg_sort = r["fpg"] if r["fpg"] is not None else -1
+        player_rows_html.append(f'''        <tr data-name="{esc(r["name"])}" data-gp="{r["gp"]}" data-pts="{r["pts"]}" data-ppg="{r["ppg"]:.1f}" data-fouls="{fouls_sort}" data-fpg="{fpg_sort:.1f}" data-wp="{r["wp"] if r["wp"] is not None else -1:.1f}">
           <td class="rank-cell"></td>
           <td class="player-name">{esc(r["name"])}</td>
           <td class="num-cell">{r["gp"]}</td><td class="num-cell">{r["pts"]}</td><td class="num-cell ppg-cell">{r["ppg"]:.1f}</td>
+          <td class="num-cell">{fouls_cell}</td><td class="num-cell">{fpg_cell}</td>
           <td class="num-cell">{wp_html}</td>
         </tr>''')
 
@@ -362,6 +379,8 @@ TEMPLATE = """<!DOCTYPE html>
           <th class="sortable num-cell" data-key="gp" data-type="num">Ott.<span class="arrow">▲▼</span></th>
           <th class="sortable num-cell" data-key="pts" data-type="num">Pist.<span class="arrow">▲▼</span></th>
           <th class="sortable num-cell active" data-key="ppg" data-type="num" data-dir="desc">Piste-ka<span class="arrow">▲▼</span></th>
+          <th class="sortable num-cell" data-key="fouls" data-type="num">Virheet<span class="arrow">▲▼</span></th>
+          <th class="sortable num-cell" data-key="fpg" data-type="num">Virhe-ka<span class="arrow">▲▼</span></th>
           <th class="sortable num-cell" data-key="wp" data-type="num">Voitto-%<span class="arrow">▲▼</span></th>
         </tr>
       </thead>
