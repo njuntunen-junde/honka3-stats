@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-11-24T22:22:44Z",
+  "generated_at": "2026-11-25T22:22:26Z",
   "team_title": "Honka 3",
   "season": "2026-2027",
   "season_totals": {
     "Juntunen Niko 7": {
       "games": 11,
-      "points": 0
+      "points": 7
     },
     "Nevasalo Miikka": {
       "games": 0,
@@ -17,11 +17,11 @@
     },
     "Vanjoki Viljami 7": {
       "games": 54,
-      "points": 0
+      "points": 5
     },
     "Kasko Tapio 8": {
       "games": 28,
-      "points": 0
+      "points": 6
     },
     "Svärd Toni": {
       "games": 0,
@@ -37,7 +37,7 @@
     },
     "Sirola Ilkka 7": {
       "games": 45,
-      "points": 0
+      "points": 11
     },
     "Viljakainen Petteri": {
       "games": 0,
@@ -45,19 +45,19 @@
     },
     "Suotamo Joonas 5": {
       "games": 45,
-      "points": 0
+      "points": 5
     },
     "Väänänen Jukka-Pekka 6": {
       "games": 117,
-      "points": 0
+      "points": 6
     },
     "Blomster Jesper 3": {
       "games": 58,
-      "points": 0
+      "points": 10
     },
     "Vanjoki Anselmi 4": {
       "games": 46,
-      "points": 0
+      "points": 2
     },
     "Herold Roy": {
       "games": 0,
@@ -77,7 +77,7 @@
     },
     "Kasko Antti 7": {
       "games": 84,
-      "points": 0
+      "points": 8
     },
     "Martinez Solis Ocler": {
       "games": 0,
@@ -85,11 +85,11 @@
     },
     "Pitkänen Lauri 8": {
       "games": 37,
-      "points": 0
+      "points": 12
     },
     "Wilson Jamar 1": {
       "games": 26,
-      "points": 0
+      "points": 1
     }
   },
   "played": [
@@ -232,13 +232,273 @@
     "1005072"
   ],
   "boxscores": {
-    "1005109": {},
-    "1005102": {},
-    "1005095": {},
-    "1005088": {},
-    "1005121": {},
-    "1005081": {},
-    "1005078": {},
-    "1005072": {}
+    "1005109": {
+      "Juntunen Niko": {
+        "pts": 0,
+        "fouls": 1
+      },
+      "Vanjoki Viljami": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Kasko Tapio": {
+        "pts": 5,
+        "fouls": 0
+      },
+      "Väänänen Jukka-Pekka": {
+        "pts": 28,
+        "fouls": 1
+      },
+      "Vanjoki Anselmi": {
+        "pts": 17,
+        "fouls": 1
+      },
+      "Kasko Antti": {
+        "pts": 23,
+        "fouls": 3
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 6,
+        "fouls": 2
+      }
+    },
+    "1005102": {
+      "Vanjoki Viljami": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Kasko Tapio": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Sirola Ilkka": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Vanjoki Anselmi": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Kasko Antti": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 0,
+        "fouls": 0
+      }
+    },
+    "1005095": {
+      "Juntunen Niko": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Vanjoki Viljami": {
+        "pts": 15,
+        "fouls": 1
+      },
+      "Kasko Tapio": {
+        "pts": 6,
+        "fouls": 1
+      },
+      "Sirola Ilkka": {
+        "pts": 6,
+        "fouls": 3
+      },
+      "Wilson Jamar": {
+        "pts": 26,
+        "fouls": 1
+      },
+      "Vanjoki Anselmi": {
+        "pts": 8,
+        "fouls": 1
+      },
+      "Kasko Antti": {
+        "pts": 6,
+        "fouls": 1
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 0,
+        "fouls": 1
+      }
+    },
+    "1005088": {
+      "Juntunen Niko": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Vanjoki Viljami": {
+        "pts": 7,
+        "fouls": 0
+      },
+      "Kasko Tapio": {
+        "pts": 0,
+        "fouls": 1
+      },
+      "Sirola Ilkka": {
+        "pts": 11,
+        "fouls": 1
+      },
+      "Suotamo Joonas": {
+        "pts": 5,
+        "fouls": 0
+      },
+      "Väänänen Jukka-Pekka": {
+        "pts": 9,
+        "fouls": 1
+      },
+      "Blomster Jesper": {
+        "pts": 16,
+        "fouls": 4
+      },
+      "Vanjoki Anselmi": {
+        "pts": 21,
+        "fouls": 0
+      },
+      "Kasko Antti": {
+        "pts": 15,
+        "fouls": 3
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 2,
+        "fouls": 3
+      }
+    },
+    "1005121": {
+      "Juntunen Niko": {
+        "pts": 11,
+        "fouls": 3
+      },
+      "Kasko Tapio": {
+        "pts": 2,
+        "fouls": 0
+      },
+      "Sirola Ilkka": {
+        "pts": 9,
+        "fouls": 4
+      },
+      "Suotamo Joonas": {
+        "pts": 9,
+        "fouls": 0
+      },
+      "Väänänen Jukka-Pekka": {
+        "pts": 21,
+        "fouls": 0
+      },
+      "Blomster Jesper": {
+        "pts": 32,
+        "fouls": 3
+      },
+      "Kasko Antti": {
+        "pts": 8,
+        "fouls": 0
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 6,
+        "fouls": 2
+      }
+    },
+    "1005081": {
+      "Juntunen Niko": {
+        "pts": 0,
+        "fouls": 2
+      },
+      "Vanjoki Viljami": {
+        "pts": 13,
+        "fouls": 1
+      },
+      "Kasko Tapio": {
+        "pts": 14,
+        "fouls": 2
+      },
+      "Sirola Ilkka": {
+        "pts": 4,
+        "fouls": 1
+      },
+      "Suotamo Joonas": {
+        "pts": 15,
+        "fouls": 1
+      },
+      "Väänänen Jukka-Pekka": {
+        "pts": 20,
+        "fouls": 0
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 8,
+        "fouls": 3
+      }
+    },
+    "1005078": {
+      "Juntunen Niko": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Vanjoki Viljami": {
+        "pts": 8,
+        "fouls": 0
+      },
+      "Kasko Tapio": {
+        "pts": 0,
+        "fouls": 2
+      },
+      "Sirola Ilkka": {
+        "pts": 15,
+        "fouls": 2
+      },
+      "Suotamo Joonas": {
+        "pts": 14,
+        "fouls": 0
+      },
+      "Väänänen Jukka-Pekka": {
+        "pts": 15,
+        "fouls": 2
+      },
+      "Kasko Antti": {
+        "pts": 20,
+        "fouls": 1
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 9,
+        "fouls": 0
+      }
+    },
+    "1005072": {
+      "Juntunen Niko": {
+        "pts": 0,
+        "fouls": 1
+      },
+      "Vanjoki Viljami": {
+        "pts": 11,
+        "fouls": 3
+      },
+      "Kasko Tapio": {
+        "pts": 1,
+        "fouls": 0
+      },
+      "Sirola Ilkka": {
+        "pts": 0,
+        "fouls": 0
+      },
+      "Suotamo Joonas": {
+        "pts": 2,
+        "fouls": 4
+      },
+      "Väänänen Jukka-Pekka": {
+        "pts": 24,
+        "fouls": 2
+      },
+      "Blomster Jesper": {
+        "pts": 10,
+        "fouls": 3
+      },
+      "Kasko Antti": {
+        "pts": 12,
+        "fouls": 0
+      },
+      "Pitkänen Lauri Tapani": {
+        "pts": 6,
+        "fouls": 1
+      }
+    }
   }
 }
